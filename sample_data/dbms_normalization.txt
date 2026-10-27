@@ -1,0 +1,30 @@
+Database Normalization
+
+Normalization is a systematic approach to organizing data in a relational database to reduce data redundancy and improve data integrity. The process involves decomposing a database into smaller, well-structured tables through a series of steps called normal forms.
+
+First Normal Form (1NF)
+A relation is in 1NF if every attribute contains only atomic (indivisible) values. There should be no repeating groups or arrays. Each column must contain values of a single type, and each row must be uniquely identifiable. For example, a student table should not have columns like Phone1, Phone2, Phone3. Instead, phone numbers should be stored in a separate related table.
+
+Second Normal Form (2NF)
+A relation is in 2NF if it is already in 1NF and every non-key attribute is fully functionally dependent on the entire primary key. This means there are no partial dependencies. Partial dependency occurs when a non-key attribute depends on only part of a composite primary key. For example, if a table has a composite key (StudentID, CourseID) and an attribute CourseName that depends only on CourseID, this violates 2NF. The solution is to decompose the table.
+
+Third Normal Form (3NF)
+A relation is in 3NF if it is in 2NF and there are no transitive dependencies. A transitive dependency occurs when a non-key attribute depends on another non-key attribute. For example, if StudentID determines DepartmentID, and DepartmentID determines DepartmentName, then StudentID transitively determines DepartmentName. The fix is to create a separate Department table.
+
+Boyce-Codd Normal Form (BCNF)
+BCNF is a stricter version of 3NF. A relation is in BCNF if for every functional dependency X -> Y, X is a superkey. BCNF handles certain cases that 3NF does not address, particularly when there are multiple overlapping candidate keys.
+
+Functional Dependencies
+A functional dependency X -> Y means that for any two rows, if they have the same value of X, they must have the same value of Y. Functional dependencies are the foundation of normalization theory. They help determine which attributes are keys, and which decompositions preserve information.
+
+Update Anomalies
+Poorly normalized databases suffer from three types of anomalies:
+1. Insertion anomaly: Cannot add data without unrelated data. For example, cannot add a new department without a student.
+2. Deletion anomaly: Deleting data causes unintended loss. Deleting the last student in a department loses the department info.
+3. Modification anomaly: Updating a fact in one place requires updating it in multiple rows, risking inconsistency.
+
+Denormalization
+Sometimes databases are deliberately denormalized for performance reasons, especially in read-heavy applications like data warehouses. This trades data redundancy for faster query execution. The key is to make this decision consciously and handle the resulting consistency challenges through application logic or ETL processes.
+
+Decomposition
+Decomposition is the process of splitting a table into smaller tables to achieve a higher normal form. A good decomposition should be lossless-join (no data is lost when tables are rejoined) and dependency-preserving (all functional dependencies can be checked within individual tables).

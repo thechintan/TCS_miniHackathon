@@ -1,0 +1,38 @@
+Supervised Learning in Machine Learning
+
+Supervised learning is a type of machine learning where the model is trained on a labeled dataset. Each training example consists of an input (features) and a desired output (label or target). The goal is to learn a mapping function from inputs to outputs that generalizes well to unseen data.
+
+Types of Supervised Learning
+1. Classification: The output is a discrete category. Examples: spam detection (spam/not spam), image classification (cat/dog), disease diagnosis (positive/negative).
+2. Regression: The output is a continuous value. Examples: house price prediction, temperature forecasting, stock price estimation.
+
+Key Algorithms
+
+Linear Regression
+Models the relationship between input features and a continuous output as a linear function: y = w1*x1 + w2*x2 + ... + b. The weights are learned by minimizing the Mean Squared Error (MSE) between predicted and actual values. Simple to interpret but assumes a linear relationship.
+
+Logistic Regression
+Despite its name, it is used for classification. It applies a sigmoid function to a linear combination of inputs to produce a probability between 0 and 1. Decision boundary is where the probability equals 0.5. Uses cross-entropy loss for training.
+
+Decision Trees
+A tree-structured model where each internal node tests an attribute, each branch represents a test outcome, and each leaf node holds a class label or value. Splitting criteria include Gini impurity and information gain (entropy). Easy to interpret but prone to overfitting.
+
+Random Forest
+An ensemble of decision trees. Each tree is trained on a random subset of the data (bagging) and a random subset of features. The final prediction is the majority vote (classification) or average (regression). Reduces overfitting compared to individual decision trees.
+
+Support Vector Machines (SVM)
+Finds the hyperplane that maximizes the margin between two classes. Data points closest to the boundary are called support vectors. Can handle non-linear boundaries using kernel functions (polynomial, RBF). Effective in high-dimensional spaces.
+
+K-Nearest Neighbors (KNN)
+A lazy learning algorithm that stores all training data. For a new point, it finds the K closest training points and predicts the majority class (classification) or average value (regression). The choice of K and distance metric (Euclidean, Manhattan) affects performance. No training phase, but slow at prediction time for large datasets.
+
+Model Evaluation
+- Train/Test Split: Divide data into training and test sets (typically 80/20 or 70/30).
+- Cross-Validation: K-fold cross-validation divides data into K folds, trains on K-1 folds, and validates on the remaining fold. Repeated K times.
+- Metrics for Classification: Accuracy, Precision, Recall, F1-Score, ROC-AUC.
+- Metrics for Regression: MSE, RMSE, MAE, R-squared.
+
+Bias-Variance Tradeoff
+- Bias: Error from overly simplistic assumptions. High bias leads to underfitting.
+- Variance: Error from sensitivity to small fluctuations in training data. High variance leads to overfitting.
+- The goal is to find the right balance for good generalization.

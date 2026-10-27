@@ -1,0 +1,35 @@
+Database Transactions and Concurrency Control
+
+A transaction is a logical unit of work that comprises one or more database operations. Transactions must satisfy the ACID properties to ensure reliability.
+
+ACID Properties
+Atomicity: A transaction is treated as a single, indivisible unit. Either all operations succeed (commit) or none of them take effect (rollback). If a system crash occurs mid-transaction, the database must be restored to its pre-transaction state.
+
+Consistency: A transaction must bring the database from one valid state to another valid state. All integrity constraints, triggers, and rules must be satisfied after the transaction completes. For example, a money transfer must preserve the total balance across accounts.
+
+Isolation: Concurrent transactions must not interfere with each other. Each transaction should execute as if it were the only transaction in the system. The result must be equivalent to some serial execution of the transactions.
+
+Durability: Once a transaction is committed, its effects are permanent, even in the case of system failures. This is typically achieved through write-ahead logging (WAL) and checkpointing.
+
+Transaction States
+A transaction goes through several states: Active (executing), Partially Committed (all operations done, waiting for commit), Committed (changes made permanent), Failed (an error occurred), and Aborted (changes rolled back).
+
+Concurrency Problems
+Without proper control, concurrent transactions can cause:
+- Lost Update: Two transactions read the same value, both modify it, and one overwrites the other.
+- Dirty Read: A transaction reads data written by an uncommitted transaction.
+- Non-repeatable Read: A transaction reads the same data twice and gets different values because another transaction modified it.
+- Phantom Read: A transaction re-executes a query and finds new rows that were inserted by another transaction.
+
+Isolation Levels
+SQL defines four isolation levels to balance consistency and performance:
+1. Read Uncommitted: Lowest isolation, allows dirty reads.
+2. Read Committed: Prevents dirty reads but allows non-repeatable reads.
+3. Repeatable Read: Prevents dirty and non-repeatable reads but allows phantom reads.
+4. Serializable: Highest isolation, prevents all anomalies but has the most overhead.
+
+Locking
+Two-Phase Locking (2PL) is the most common concurrency control protocol. In the growing phase, a transaction acquires locks. In the shrinking phase, it releases locks. A transaction cannot acquire new locks after releasing any lock. This guarantees serializability but can cause deadlocks.
+
+Deadlock Handling
+Deadlocks occur when two or more transactions wait for each other to release locks. Detection uses a wait-for graph; if a cycle exists, a deadlock is present. Prevention strategies include wound-wait and wait-die schemes based on transaction timestamps.

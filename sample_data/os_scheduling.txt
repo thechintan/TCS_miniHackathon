@@ -1,0 +1,28 @@
+CPU Scheduling Algorithms
+
+CPU scheduling is the task of selecting a process from the ready queue and allocating the CPU to it. The scheduler makes this decision whenever the CPU becomes idle or a higher-priority process arrives.
+
+Scheduling Criteria
+- CPU Utilization: Keep the CPU as busy as possible (ideally 40-90%).
+- Throughput: Number of processes completed per unit time.
+- Turnaround Time: Total time from submission to completion of a process.
+- Waiting Time: Total time a process spends in the ready queue.
+- Response Time: Time from submission until the first response is produced (important for interactive systems).
+
+First-Come, First-Served (FCFS)
+The simplest scheduling algorithm. Processes are executed in the order they arrive. It is non-preemptive. The major problem is the convoy effect: short processes stuck behind a long process, leading to high average waiting time.
+
+Shortest Job First (SJF)
+Selects the process with the smallest burst time. It is provably optimal for minimizing average waiting time. However, it requires knowing the burst time in advance, which is usually estimated. The preemptive version is called Shortest Remaining Time First (SRTF). SJF can cause starvation of long processes.
+
+Round Robin (RR)
+Each process gets a fixed time quantum (typically 10-100ms). After the quantum expires, the process is moved to the back of the ready queue. RR is fair and responsive, making it suitable for time-sharing systems. The choice of quantum size is critical: too small causes excessive context switching, too large degenerates into FCFS.
+
+Priority Scheduling
+Each process is assigned a priority. The CPU is allocated to the highest-priority process. Can be preemptive or non-preemptive. The main problem is starvation of low-priority processes. Solution: aging, which gradually increases the priority of waiting processes.
+
+Multilevel Queue Scheduling
+The ready queue is divided into multiple queues, each with its own scheduling algorithm. For example: foreground (interactive) processes use RR, background (batch) processes use FCFS. Each queue has a priority level.
+
+Multilevel Feedback Queue
+Similar to multilevel queue, but processes can move between queues based on their behavior. CPU-bound processes gradually move to lower-priority queues. I/O-bound processes are promoted to higher-priority queues. This adapts to the actual behavior of processes without requiring prior knowledge.

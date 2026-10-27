@@ -1,0 +1,43 @@
+Overfitting and Regularization in Machine Learning
+
+Overfitting occurs when a model learns not only the underlying pattern in the training data but also the noise. An overfit model has excellent performance on training data but poor performance on unseen test data. It has memorized the training examples rather than learning generalizable patterns.
+
+Signs of Overfitting
+- Very high training accuracy but significantly lower test accuracy.
+- The model is excessively complex (too many parameters relative to the amount of training data).
+- Training loss decreases while validation loss increases (divergence after a certain point).
+
+Causes of Overfitting
+1. Insufficient training data: Small datasets make it easy for models to memorize patterns.
+2. Model complexity: Too many parameters (deep networks, high-degree polynomials).
+3. Training too long: In iterative algorithms, extended training can lead to memorization.
+4. Noisy data: Outliers and errors in the dataset get learned as patterns.
+
+Underfitting
+The opposite of overfitting. The model is too simple to capture the underlying pattern. Signs include poor performance on both training and test data. Causes include using too simple a model, insufficient features, or excessive regularization.
+
+Regularization Techniques
+
+L1 Regularization (Lasso)
+Adds the sum of absolute values of weights to the loss function: Loss = Original_Loss + lambda * sum(|w|). L1 encourages sparsity by driving some weights to exactly zero, effectively performing feature selection. Useful when you suspect many features are irrelevant.
+
+L2 Regularization (Ridge)
+Adds the sum of squared weights to the loss function: Loss = Original_Loss + lambda * sum(w^2). L2 penalizes large weights but does not make them exactly zero. It spreads the weight values more evenly. Generally preferred when all features are expected to contribute.
+
+Elastic Net
+Combines L1 and L2 regularization: Loss = Original_Loss + lambda1 * sum(|w|) + lambda2 * sum(w^2). Useful when there are many correlated features.
+
+Dropout (for Neural Networks)
+During training, randomly set a fraction of neurons to zero at each step. This prevents neurons from co-adapting and forces the network to learn redundant representations. Typical dropout rates: 20-50%. Not used during inference.
+
+Early Stopping
+Monitor validation loss during training. Stop training when validation loss begins to increase (even if training loss continues to decrease). The model checkpoint at the best validation loss is used.
+
+Data Augmentation
+Increase the effective size of the training dataset by creating modified versions of existing data. For images: rotation, flipping, scaling, cropping, color jittering. For text: synonym replacement, random insertion, back-translation.
+
+Cross-Validation for Model Selection
+Use K-fold cross-validation to estimate how well a model generalizes. Helps choose between different model architectures and hyperparameters. The model with the best average validation performance across folds is selected.
+
+The Bias-Variance Tradeoff
+Regularization increases bias slightly but reduces variance significantly. The net effect is usually better generalization. The regularization strength (lambda) controls this tradeoff. Too much regularization leads to underfitting; too little leads to overfitting.

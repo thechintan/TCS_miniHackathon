@@ -1,0 +1,32 @@
+{
+  "dbms_normalization": {
+    "title": "Database Normalization",
+    "summary": "Database normalization is a systematic approach to organizing relational databases to reduce data redundancy and improve data integrity. The process involves decomposing tables into smaller, well-structured relations through a series of normal forms (1NF through BCNF). First Normal Form eliminates repeating groups by ensuring atomic values. Second Normal Form removes partial dependencies on composite keys. Third Normal Form eliminates transitive dependencies between non-key attributes.",
+    "key_points": [
+      "Normalization reduces data redundancy by organizing data into well-structured tables",
+      "1NF requires all column values to be atomic with no repeating groups",
+      "2NF removes partial dependencies on composite primary keys",
+      "3NF eliminates transitive dependencies between non-key attributes",
+      "BCNF is a stricter version of 3NF where every determinant must be a superkey"
+    ],
+    "flashcards": [
+      {"q": "What is the primary goal of database normalization?", "a": "To reduce data redundancy and eliminate update anomalies."},
+      {"q": "What condition must a table satisfy to be in 1NF?", "a": "All column values must be atomic and there must be no repeating groups."},
+      {"q": "What type of dependency does 3NF eliminate?", "a": "Transitive dependencies between non-key attributes."}
+    ]
+  },
+  "os_deadlocks": {
+    "title": "Deadlocks in Operating Systems",
+    "summary": "A deadlock occurs when processes are stuck waiting for resources held by each other. Four conditions must hold: mutual exclusion, hold and wait, no preemption, and circular wait. Prevention eliminates one condition; avoidance uses the Banker's Algorithm to check for safe states; detection uses wait-for graphs.",
+    "key_points": [
+      "All four Coffman conditions must hold simultaneously for deadlock",
+      "Banker's Algorithm checks for safe states before granting resources",
+      "Wait-for graphs detect cycles indicating deadlocks",
+      "Recovery options: process termination or resource preemption"
+    ],
+    "flashcards": [
+      {"q": "What are the four necessary conditions for deadlock?", "a": "Mutual exclusion, hold and wait, no preemption, and circular wait."},
+      {"q": "What does the Banker's Algorithm check?", "a": "Whether granting a resource request would leave the system in a safe state."}
+    ]
+  }
+}
