@@ -99,7 +99,11 @@ def generate_flashcards(text: str, n: int = 5) -> list[dict]:
     if isinstance(result, list) and all(isinstance(c, dict) for c in result):
         return result[:n]
 
-    return _mock_flashcards()
+    try:
+        from modules.nlp_engine import dynamic_flashcards
+        return dynamic_flashcards(text, max_cards=n)
+    except Exception:
+        return _mock_flashcards()
 
 
 def generate_quiz(text: str, n: int = 5) -> list[dict]:
@@ -123,13 +127,24 @@ def generate_quiz(text: str, n: int = 5) -> list[dict]:
                     q["answer_index"] = 0
         return result[:n]
 
-    return _mock_quiz()
+    try:
+        from modules.nlp_engine import dynamic_quiz
+        return dynamic_quiz(text, num_questions=n)
+    except Exception:
+        return _mock_quiz()
 
 
 # ── Mock data (used by core/summarizer.py compatibility layer too) ────────
 
 def mock_summarize_result(text: str = "", style: str = "concise") -> dict:
-    """Return a complete mock result shape for UI development."""
+    """Return a complete study package for any input text, with template fallback if empty."""
+    if text and text.strip():
+        try:
+            from modules.nlp_engine import dynamic_process_all
+            return dynamic_process_all(text, style=style)
+        except Exception:
+            pass
+
     wc = len(text.split()) if text else 2400
     summary_text = (
         "Database normalization is a systematic approach to organizing relational databases "

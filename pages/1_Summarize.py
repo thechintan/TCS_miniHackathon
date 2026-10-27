@@ -145,6 +145,11 @@ if result is None and st.session_state.current_note_id:
             "topics": [],
             "key_terms": [],
         }
+        if note_data and note_data.get("content"):
+            from modules.nlp_engine import dynamic_topics_and_terms
+            d_topics, d_terms = dynamic_topics_and_terms(note_data["content"])
+            result["topics"] = d_topics
+            result["key_terms"] = d_terms
 
 if result:
     st.markdown("---")

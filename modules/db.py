@@ -208,8 +208,13 @@ def load_sample_data() -> int:
         if existing:
             continue
 
-        save_note(title, subject, content, source="sample")
+        note_id = save_note(title, subject, content, source="sample")
         count += 1
+        try:
+            from modules.chat import index_note
+            index_note(note_id, title, content)
+        except Exception:
+            pass
 
     # Also load sample quiz scores if available
     csv_path = os.path.join(SAMPLE_DIR, "sample_quiz_scores.csv")

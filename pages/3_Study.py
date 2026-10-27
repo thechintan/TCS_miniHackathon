@@ -48,12 +48,13 @@ note_id = note_options[selected_label]
 note_data = get_note(note_id)
 summary_data = get_summary(note_id)
 
-# Use mock data if no summary exists yet
-if summary_data:
+# Load study data or generate dynamically from note content
+if summary_data and (summary_data.get("flashcards") or summary_data.get("quiz")):
     flashcards = summary_data.get("flashcards", [])
     quiz_questions = summary_data.get("quiz", [])
 else:
-    mock = mock_summarize_result()
+    content = note_data.get("content", "") if note_data else ""
+    mock = mock_summarize_result(content)
     flashcards = mock["flashcards"]
     quiz_questions = mock["quiz"]
 
